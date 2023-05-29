@@ -93,9 +93,9 @@ class Menu:
                 if state.name == destine:
                     destine = state
 
-            simbol = input("Simbolo: ")
+            symbol = input("Simbolo: ")
             
-            self.afd.add_transition(origin, destine, simbol)
+            self.afd.add_transition(origin, destine, symbol)
 
     def check_word(self):
         while True:

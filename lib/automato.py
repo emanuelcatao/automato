@@ -8,10 +8,10 @@ class AFD:
             self.is_final = is_final
 
     class Transicao:
-        def __init__(self, origin, destine, simbol):
+        def __init__(self, origin, destine, symbol):
             self.origin = origin
             self.destine = destine
-            self.simbol = simbol
+            self.symbol = symbol
 
     def __init__(self):
         self.states = set()
@@ -32,23 +32,23 @@ class AFD:
             self.final_states.add(state)
         return state
 
-    def add_transition(self, origin, destine, simbol):
-        transicao = self.Transicao(origin, destine, simbol)
+    def add_transition(self, origin, destine, symbol):
+        transicao = self.Transicao(origin, destine, symbol)
         if origin not in self.transitions:
             self.transitions[origin] = []
         else:
             for transition in self.transitions[origin]:
-                if transition.destine == destine and simbol == transition.simbol:
+                if transition.destine == destine and symbol == transition.symbol:
                     print("Transição já existente!")
                     return
         self.transitions[origin].append(transicao)
-        self.alphabet.add(simbol)
+        self.alphabet.add(symbol)
 
     def transicao_estendida(self, current_state, word):
-        def transicao(state, simbol):
+        def transicao(state, symbol):
             if state in self.transitions:
                 for transicao in self.transitions[state]:
-                    if transicao.simbol == simbol:
+                    if transicao.symbol == symbol:
                         return transicao.destine
             return None
         if word == '':
@@ -93,10 +93,10 @@ class AFD:
             for transicao in transitions:
                 origin_name = origin.name
                 destine_name = transicao.destine.name
-                simbol = transicao.simbol
+                symbol = transicao.symbol
 
-                items += "__" + origin_name + '-' + destine_name + '-' + simbol
-                dot.edge(origin_name, destine_name, label=simbol)
+                items += "__" + origin_name + '-' + destine_name + '-' + symbol
+                dot.edge(origin_name, destine_name, label=symbol)
 
         out_name = 'automato' + items
 
